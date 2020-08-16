@@ -18,12 +18,13 @@
         <a href="#productos">Productos y Servicios</a>
         <a href="#compensaciones">Compensaciones</a>
         <a href="#footer">Contáctanos</a>
+        <a href="https://www.wingsmobile.net/store/99000122805"><img src="assets/comercio-electronico.svg" alt="Ir a la tienda de Wings Mobile"></a>
     </nav>
     <header>
         <div class="textos">
             <h1 class="titulo">Fausto y Vanessa</h1>
             <h3 class="subtitulo">Creando Futuro</h3>
-            <a href="#" class="boton">Suscribete</a>
+            <!-- <a href="#" class="boton">Suscribete</a> -->
         </div>
         <div class="sesgoabajo"></div>
     </header>
@@ -46,7 +47,7 @@
                     placeat nisi laborum odit libero facere sint consequatur quia consectetur in velit molestias
                     praesentium repellat quas laudantium deserunt consequuntur eaque, optio ducimus autem aperiam.
                     Doloremque, quasi dicta?</p>
-                <a href="#" class="boton">Suscribete</a>
+                <a href="#" class="boton">Ver más</a>
             </div>
         </section>
         <section class="galeria">
@@ -100,14 +101,26 @@
         </section>
         <section id="compensaciones" class="fondo">
             <div class="sesgoarriba"></div>
-            <h2 class="titulo-patrocinadores">Sistema de compensaciones con WingsMobile</h2>
-            <h3 class="subtitulo-patrocinadores">Conoce algunos de nuestros patrocinadores</h3>
-            <div class="clientes">
-                <div class="cliente"><img src=".\assets\logo.png" alt=""></div>
-                <div class="cliente"><img src=".\assets\logo.png" alt=""></div>
-                <div class="cliente"><img src=".\assets\logo.png" alt=""></div>
+            <h2 class="titulo-compensaciones">Sistema de compensaciones con Wings Mobile</h2>
+            <h3 class="subtitulo-compensaciones">Nuestro plan de compensaciones se divide en 3</h3>
+            <div class="compensaciones">
+                <div class="compensacion">
+                    <h2>1</h2>
+                    <hr>
+                    <p><strong>Nuevos Afiliados</strong> que activen el programa de Afiliación.</p>
+                </div>
+                <div class="compensacion">
+                    <h2>2</h2>
+                    <hr>
+                    <p><strong>Nuevos Clientes</strong> que adquieran un <strong>producto Wings Mobile.</strong></p>
+                </div>
+                <div class="compensacion">
+                    <h2>3</h2>
+                    <hr>
+                    <p><strong>Nuevos Clientes</strong> que adquieran un <strong>servicio Wings Mobile.</strong></p>
+                </div>
             </div>
-            <h3 class="subtitulo-patrocinadores especial">y muchos más clientes...</h3>
+            <div class="compensaciones__video"><iframe  src="https://www.youtube.com/embed/jsxao3gVTB4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
             <div class="sesgoabajo-unico"></div>
         </section>
     </main>
@@ -116,15 +129,75 @@
             <h2 class="titulo-footer">Contactanos</h2>
             <h3 class="subtitulo-footer">Lo apreciariamos mucho</h3>
             <div class="footer">
-                <form action="">
-                    <input type="text" name="" id="" placeholder="Nombre">
-                    <input type="email" name="" id="" placeholder="Email">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Ingrese su mensaje..."></textarea>
+                <form action="submit" id="contactForm">
+                    <input type="text" required name="" id="nombre" placeholder="Nombre">
+                    <input type="text" required name="" id="celular" placeholder="Celular" >
+                    <input type="email" required name="" id="email" placeholder="Email">
+                    <textarea name="" required id="mensaje" cols="30" rows="10" placeholder="Ingrese su mensaje..."></textarea>
                     <input type="submit" value="Enviar">
                 </form>
             </div>
         </div>
     </footer>
 </body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBSVVQq8vASsJf10OBeGX3Ve-bDrxeiPfA",
+    authDomain: "contacto-fv.firebaseapp.com",
+    databaseURL: "https://contacto-fv.firebaseio.com",
+    projectId: "contacto-fv",
+    storageBucket: "contacto-fv.appspot.com",
+    messagingSenderId: "726338384778",
+    appId: "1:726338384778:web:392cff87272cf543abce73",
+    measurementId: "G-LETCE0HKNT"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+<script>
+    const form = document.getElementById('contactForm'); // Obtenemos la referencia al formulario
+
+    if(form){ // Si existe nuestro elemento en memoria este se quedara escuchando al evento submit del formulario
+      form.addEventListener('submit', contactForm); // Al momento de enviar el formulario, ejecuta la función "contactform"
+    }else{
+        alert("No llegó nada")
+    }
+
+    function contactForm(event) {
+      event.preventDefault(); // Prevenimos el comportamiento por defecto de un formulario (Enviar por URL los parametros)
+      const nombre = document.getElementById('nombre'); // Obtenemos la referencia a cada uno de nuestros elementos del formulario
+      const email = document.getElementById('email');
+      const celular = document.getElementById('celular');
+      const comentario = document.getElementById('comentario');
+      const data = {
+        'name': nombre.value,
+        'email': email.value,
+        'celular': celular.value,
+        'mensaje': mensaje.value
+      }; // Creamos un objecto con todos los elementos de nuestro formulario.
+      saveContactForm(data); // Enviamos la información obtenida por el usuario a la función que se encargara de guardar la información en Firebase
+      form.reset(); // borramos todos los campos. 
+    }
+
+  function saveContactForm(data) {
+    console.log(data)
+    firebase.database().ref("/contact").push(data) // Hacemos referencia al método database de el SDK y hacemos referencia el nombre del objeto que contendrá nuestros registros y empujamos los nuevos envios de datos
+      .then(function(){
+        alert('Gracias por contar con nosotros'); // Si la petición es correcta y almaceno los datos mostramos un mensaje al usuario.
+      })
+      .catch(function(){
+        alert('Hubo un error, Por favor vuelve a intentarlo'); // En caso de ocurrir un error le mostramos al usuario que ocurrió un error.
+      });
+  };
+</script>
 </html>

@@ -19,6 +19,14 @@ body{
     text-align: right;
 }
 
+.menu img{
+    position: relative;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
 .menu p{
     display: inline;
     position: absolute;
@@ -242,13 +250,13 @@ header .boton:hover{
 }
 
 .fondo {
-    height: 900px;
+    height: 1024px;
     position: relative;
     background-image: url(fondo.jpg);
     overflow: hidden;
     background-attachment: fixed;
     background-position: center;
-    padding-top: 130px;
+    padding-top: 150px;
     
 }
 
@@ -262,23 +270,23 @@ header .boton:hover{
     border-color: transparent transparent #2c3e50 transparent;
 }
 
-.titulo-patrocinadores, .subtitulo-patrocinadores {
+.titulo-compensaciones, .subtitulo-compensaciones {
     color: #fff;
     text-align: center;;
 }
 
-.titulo-patrocinadores {
+.titulo-compensaciones {
     font-size: 46px;
     margin-top: 48px;
 }
 
-.subtitulo-patrocinadores {
+.subtitulo-compensaciones {
     font-size: 24px;
     font-weight: 300;
     margin-bottom: 64px;
 }
 
-.clientes {
+.compensaciones {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 64px;
@@ -286,12 +294,42 @@ header .boton:hover{
     justify-content: space-between;
 }
 
-.cliente {
+.compensacion {
     width: 30%;
+    margin: auto;
+    height: 120px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 6%;
+    box-shadow: 0px 0px 4px 0 rgba(52, 73, 94, 0.849);
+    background: linear-gradient(to bottom, rgba(252,234,187,1) 0%, rgba(252,205,77,1) 41%, rgba(248,181,0,1) 53%, rgba(251,223,147,1) 100%);
 }
 
-.cliente img{
-    width: 100%;
+.compensacion h2 {
+    color: rgb(67,67,67);
+    display: inline;
+    font-size: 56px;
+}
+
+.compensacion hr{
+    display: inline;
+    font-size: 56px;
+    margin: 10px;
+}
+
+.compensacion p{
+    display: inline;
+    padding: 0;
+}
+
+.compensaciones__video{
+    margin: auto;
+    width: 560px;
+}
+
+.compensaciones__video iframe{
+    width: 560px; 
+    height: 315px;
 }
 
 footer{
@@ -322,7 +360,7 @@ form{
 
 
 
-input[type="text"], input[type="email"]{
+input[type="text"], input[type="email"], input[type="number"]{
     display: inline-block;
     width: 48%;
     padding: 13px;
@@ -334,7 +372,7 @@ input[type="text"], input[type="email"]{
     border-top: 5px solid rgba(37,37,33,.7)
 }
 
-input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+input[type="text"]:focus, input[type="email"]:focus, input[type="number"], textarea:focus {
     border-top: 5px solid rgba(255,255,255,.7)
 }
 
